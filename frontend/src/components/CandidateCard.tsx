@@ -1,4 +1,4 @@
-import type { Candidate } from "../types/candidate";
+import { STATUS_OPTIONS, type Candidate } from "../types/candidate";
 import { initials } from "../utils/card";
 
 export function CandidateCard(props: {
@@ -21,6 +21,11 @@ export function CandidateCard(props: {
                    {initials(c.name)} 
                 </div>
                 )}
+
+                <div className="min-w-0">
+                    <div className="truncate text-sm font-extrabold text-slate-900">{c.name}</div>
+                    <div className="truncate text-sm text-slate-600">{c.position}</div>
+                </div>
             </div>
         </div>
     );
