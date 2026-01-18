@@ -27,3 +27,8 @@ export const STATUS_OPTIONS: Array<{value: CandidateStatus; label: string}> = [
     {value: "interview", label: "Interview"},
     {value: "rejected", label: "Rejected"},
 ];
+
+export type CandidateFiltersState = {
+  status: CandidateStatus | "all";
+  search: string;
+};
