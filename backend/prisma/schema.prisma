@@ -1,0 +1,48 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+enum CandidateStatus {
+  active
+  interview
+  rejected
+}
+
+model Candidate {
+  id        Int       @id @default(autoincrement())
+  name      String
+  position  String
+  status    CandidateStatus @default(active)
+  email     String    @unique
+  phone     String
+  description   String
+
+  skills      CandidateSkill[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+model Skill {
+  id       Int       @id @default(autoincrement())
+  name     String    @unique
+
+  candidates CandidateSkill[]
+}
+
+model CandidateSkill {
+  candidateId Int 
+  skillId     Int
+
+  candidate    Candidate @relation(fields: [candidateId], references: [id], onDelete: Cascade)
+  skill        Skill     @relation(fields: [skillId], references: [id], onDelete: Cascade)
+  @@id([candidateId, skillId])
+  @@index([skillId]) 
+}
