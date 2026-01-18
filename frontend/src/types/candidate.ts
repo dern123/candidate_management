@@ -21,3 +21,9 @@ export type CandidateDetails = Candidate & {
     createdAt: string;
     updatedAt: string;
 }
+
+export const STATUS_OPTIONS: Array<{value: CandidateStatus; label: string}> = [
+    {value: "active", label: "Active"},
+    {value: "interview", label: "Interview"},
+    {value: "rejected", label: "Rejected"},
+];
