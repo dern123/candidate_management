@@ -55,6 +55,7 @@ router.get("/:id", async (req, res, next) => {
 
         res.status(200).json({
             ...condidate,
+            skills: condidate.skills.map((cs) => cs.skill),
         });
 
     } catch (e) {
