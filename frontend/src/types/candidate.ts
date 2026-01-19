@@ -5,6 +5,12 @@ export type Skill = {
     name: string;
 }
 
+export type CandidateSkill = {
+  candidateId: number;
+  skillId: number;
+  skill: Skill;
+};
+
 export interface Candidate {
     id: number;
     name: string;
@@ -17,7 +23,7 @@ export type CandidateDetails = Candidate & {
     email: string;
     phone: string;
     description?: string;
-    skills: Skill[];
+    skills: CandidateSkill[];
     createdAt: string;
     updatedAt: string;
 }

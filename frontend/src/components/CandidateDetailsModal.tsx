@@ -32,6 +32,9 @@ export function CandidateDetailsModal(props: {
 
   const headerName = details?.name ?? props.candidatePreview?.name ?? "Candidate";
   const currentStatus = details?.status ?? props.candidatePreview?.status ?? "active";
+  const userSkills = (details?.skills ?? [])
+    .map((item: any) => item?.skill ?? item)
+    .filter((s: any) => s && typeof s.name === "string" && s.name.trim().length > 0);
 
   return (
     <div
@@ -77,14 +80,18 @@ export function CandidateDetailsModal(props: {
             <div className="grid gap-2">
               <div className="text-sm font-semibold text-slate-900">Skills</div>
               <div className="flex flex-wrap gap-2">
-                {details.skills.map((s) => (
-                  <span
-                    key={s.id}
-                    className="inline-flex items-center rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-semibold text-slate-700"
-                  >
-                    {s.name}
-                  </span>
-                ))}
+                {userSkills.length > 0 ? (
+                  userSkills.map((s: any, idx: number) => (
+                    <span
+                      key={s.id ?? `${s.name}-${idx}`}
+                      className="inline-flex items-center rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs font-semibold text-slate-700"
+                    >
+                      {s.name}
+                    </span>
+                  ))
+                ) : (
+                  <span className="text-sm text-slate-400">No skills</span>
+                )}
               </div>
             </div>
 
